@@ -9,15 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class CoordsCommand implements CommandExecutor {
-
-    private final JavaPlugin plugin;
-
-    public CoordsCommand(JavaPlugin plugin) {
-        this.plugin = plugin;
-    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
@@ -25,6 +18,7 @@ public class CoordsCommand implements CommandExecutor {
             sender.sendMessage("CoordsPlugin: Command only executable by players.");
             return true;
         }
+
         Player p = (Player) sender;
         p.openInventory(createInventory());
 
@@ -35,7 +29,7 @@ public class CoordsCommand implements CommandExecutor {
         int online = Bukkit.getOnlinePlayers().size();
         int invSize = online + (9-(online % 9));
 
-        Inventory inv = Bukkit.createInventory(null, invSize, "Buy Player's Coordinates");
+        Inventory inv = Bukkit.createInventory(null, invSize, Config.getInstance().translateColor(Config.getInstance().menuTitle));
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             inv.addItem(getPlayerSkull(p));
@@ -50,7 +44,9 @@ public class CoordsCommand implements CommandExecutor {
 
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         meta.setOwningPlayer(player);
-        meta.setDisplayName("&a" + player.getName());
+        meta.setDisplayName(Config.getInstance().replaceAndTranslateColor(Config.getInstance().itemTitle, player));
+        meta.setLore(Config.getInstance().replaceAndTranslateColor(Config.getInstance().itemDescription, player));
+
         skull.setItemMeta(meta);
         return skull;
     }

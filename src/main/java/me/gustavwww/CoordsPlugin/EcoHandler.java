@@ -10,21 +10,18 @@ public class EcoHandler {
 
     public static EcoHandler instance = null;
 
-    public static EcoHandler getInstance(JavaPlugin plugin) {
+    public static EcoHandler getInstance() {
         if (instance == null) {
-            instance = new EcoHandler(plugin);
+            instance = new EcoHandler();
         }
         return instance;
     }
 
-    private final JavaPlugin plugin;
     private Economy eco = null;
 
-    private EcoHandler(JavaPlugin plugin) {
-        this.plugin = plugin;
-    }
+    private EcoHandler() {}
 
-    public boolean setupEconomy() {
+    public boolean setupEconomy(JavaPlugin plugin) {
         if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
@@ -38,8 +35,8 @@ public class EcoHandler {
         return true;
     }
 
-    public EconomyResponse withdrawPlayer(OfflinePlayer player, double amount) {
-        return eco.withdrawPlayer(player, amount);
+    public boolean withdrawPlayer(OfflinePlayer player, double amount) {
+        return eco.withdrawPlayer(player, amount).transactionSuccess();
     }
 
 }

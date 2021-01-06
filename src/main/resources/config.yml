@@ -1,0 +1,30 @@
+# CoordsPlugin - copyright @ Gustav Vadström 2021
+
+# The Title of the opened inventory "menu"
+MenuTitle: "Purchase Player's Coordinates"
+
+# The amount of money required to purchase coordinates.
+Price: 1500000
+
+# The title and description of the head displayed as a player.
+# %name% - The player's name
+# %displayname% - The player's display name
+# %price% - The cost of the item.
+ItemTitle: "&a%name%"
+
+ItemDesc:
+  - "&bPrice: %price%"
+  - "&8Click to purchase this player's coordinates"
+
+NotEnoughMoney: "&cInsufficient founds."
+PlayerOffline: "&cPlayer has logged out."
+
+# The message sent when purchase is complete.
+# %name% - The player's name
+# %displayname% - The player's display name
+# %price% - The cost of the item.
+# %worldtype% - What world they are in. Nether,End,Normal
+# %x% %y% %z% - Default coordinates
+CoordMessage:
+  - "&bYou purchased &a%name%'s &bcoordinates for &c%price%."
+  - "&aCoordinates: &c[%worldtype%] %x%, %y%, %z%"
