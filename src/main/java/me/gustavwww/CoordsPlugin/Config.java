@@ -32,7 +32,7 @@ public class Config {
         plugin.saveDefaultConfig();
 
         menuTitle = plugin.getConfig().getString("MenuTitle");
-        price = plugin.getConfig().getDouble("price");
+        price = plugin.getConfig().getDouble("Price");
         itemTitle = plugin.getConfig().getString("ItemTitle");
         itemDescription = plugin.getConfig().getStringList("ItemDesc");
         notEnoughMoney = plugin.getConfig().getString("NotEnoughMoney");

@@ -3,6 +3,7 @@ version: 1.0
 main: me.gustavwww.CoordsPlugin.Main
 description: Let players purchase other players coordinates.
 author: gustavwww
+api-version: 1.16
 commands:
   coords:
     description: Purchase coordinates

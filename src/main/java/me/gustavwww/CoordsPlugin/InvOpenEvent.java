@@ -19,15 +19,12 @@ public class InvOpenEvent implements Listener {
             return;
         }
 
-        Inventory inv = event.getClickedInventory();
-
-        for (ItemStack i : inv.getContents()) {
-            if (i.getItemMeta() instanceof SkullMeta) {
-                SkullMeta meta = (SkullMeta) i.getItemMeta();
-                if (meta.hasOwner()) {
-                    OfflinePlayer clicked = meta.getOwningPlayer();
-                    performPurchaseCoordinates((Player) event.getWhoClicked(), clicked);
-                }
+        ItemStack item = event.getCurrentItem();
+        if (item != null) {
+            SkullMeta meta = (SkullMeta) item.getItemMeta();
+            if (meta != null && meta.hasOwner()) {
+                OfflinePlayer clicked = meta.getOwningPlayer();
+                performPurchaseCoordinates((Player) event.getWhoClicked(), clicked);
             }
         }
 
