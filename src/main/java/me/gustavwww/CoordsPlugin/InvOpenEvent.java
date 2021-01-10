@@ -1,12 +1,15 @@
 package me.gustavwww.CoordsPlugin;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.List;
@@ -42,14 +45,14 @@ public class InvOpenEvent implements Listener {
             sender.sendMessage(config.replaceAndTranslateColor(config.notEnoughMoney, sender, victim.getPlayer()));
             return;
         }
-        Player vic = victim.getPlayer();
+        Location coordinates = victim.getPlayer().getLocation();
 
         List<String> messages = config.replaceAndTranslateColor(config.coordMessage, sender, victim.getPlayer());
         for (String msg : messages) {
-            String replaced = msg.replaceAll("%worldtype%", vic.getLocation().getWorld().getEnvironment().toString())
-                    .replaceAll("%x%", String.valueOf(vic.getLocation().getBlockX()))
-                    .replaceAll("%y%", String.valueOf(vic.getLocation().getBlockY()))
-                    .replaceAll("%z%", String.valueOf(vic.getLocation().getBlockZ()));
+            String replaced = msg.replaceAll("%worldtype%", coordinates.getWorld().getEnvironment().toString())
+                    .replaceAll("%x%", String.valueOf(coordinates.getBlockX()))
+                    .replaceAll("%y%", String.valueOf(coordinates.getBlockY()))
+                    .replaceAll("%z%", String.valueOf(coordinates.getBlockZ()));
 
             sender.sendMessage(replaced);
         }
@@ -60,11 +63,23 @@ public class InvOpenEvent implements Listener {
                 Bukkit.broadcastMessage(msg);
             }
         }
+
+        if (config.giveCompass) {
+            sender.getInventory().addItem(createCompass(sender, victim.getPlayer(), coordinates));
+        }
+
     }
 
-    private void createCompass() {
+    private ItemStack createCompass(Player p, Player victim, Location location) {
 
+        ItemStack compass = new ItemStack(Material.COMPASS, 1);
 
+        CompassMeta meta = (CompassMeta) compass.getItemMeta();
+        meta.setDisplayName(config.replaceAndTranslateColor(config.compassTitle, p, victim));
+        meta.setLore(config.replaceAndTranslateColor(config.compassDescription, p, victim));
+        meta.setLodestone(location);
+
+        return compass;
     }
 
 }

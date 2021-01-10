@@ -22,6 +22,9 @@ public class Config {
     public String menuTitle;
     public double price;
     public boolean skipOp;
+    public boolean giveCompass;
+    public String compassTitle;
+    public List<String> compassDescription;
     public String itemTitle;
     public List<String> itemDescription;
     public String notEnoughMoney;
@@ -40,6 +43,9 @@ public class Config {
         menuTitle = config.getString("MenuTitle");
         price = config.getDouble("Price");
         skipOp = config.getBoolean("SkipOp");
+        giveCompass = config.getBoolean("GiveCompass");
+        compassTitle = config.getString("CompassTitle");
+        compassDescription = config.getStringList("CompassDesc");
         itemTitle = config.getString("ItemTitle");
         itemDescription = config.getStringList("ItemDesc");
         notEnoughMoney = config.getString("NotEnoughMoney");

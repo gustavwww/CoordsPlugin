@@ -1,5 +1,13 @@
 # CoordsPlugin - copyright @ Gustav Vadström 2021
 
+# The following tags can be used in most messages.
+
+# %buyer% - The player's name that bought the coordinates.
+# %buyer_display% - The buyer's display name.
+# %victim% - The victim's name
+# %victim_display% - The victim's display name
+# %price% - The cost of the item.
+
 # The Title of the opened inventory "menu"
 MenuTitle: "Purchase Player's Coordinates"
 
@@ -9,14 +17,16 @@ Price: 1500000
 # Skip displaying op players.
 SkipOp: true
 
-# The title and description of the head displayed as a player.
-# %buyer% - The player's name that bought the coordinates.
-# %buyer_display% - The buyer's display name.
-# %victim% - The victim's name
-# %victim_display% - The victim's display name
-# %price% - The cost of the item.
-ItemTitle: "&3%victim%"
+# Should player's get a compass pointing to the Victims
+# location upon purchasing coordinates?
+GiveCompass: true
 
+CompassTitle: "&9Coords Compass"
+CompassDesc:
+  - "&8Points to coordinates of &3%victim%"
+
+# The title and description of the head displayed as a player.
+ItemTitle: "&3%victim%"
 ItemDesc:
   - "&9Price: &a%price%"
   - "&8Click to purchase this player's coordinates"
