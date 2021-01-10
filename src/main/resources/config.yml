@@ -26,5 +26,5 @@ PlayerOffline: "&cPlayer has logged out."
 # %worldtype% - What world they are in. Nether,End,Normal
 # %x% %y% %z% - Default coordinates
 CoordMessage:
-  - "&bYou purchased &a%name%'s &bcoordinates for &c%price%."
+  - "&bYou purchased &a%buyer%'s &bcoordinates for &c%price%."
   - "&aCoordinates: &c[%worldtype%] %x%, %y%, %z%"
