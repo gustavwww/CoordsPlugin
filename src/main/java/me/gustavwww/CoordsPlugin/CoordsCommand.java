@@ -12,6 +12,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 public class CoordsCommand implements CommandExecutor {
 
+    private final Config config = Config.getInstance();
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
         if (!(sender instanceof Player)) {
@@ -29,7 +31,7 @@ public class CoordsCommand implements CommandExecutor {
         int online = Bukkit.getOnlinePlayers().size();
         int invSize = online + (9-(online % 9));
 
-        Inventory inv = Bukkit.createInventory(null, invSize, Config.getInstance().translateColor(Config.getInstance().menuTitle));
+        Inventory inv = Bukkit.createInventory(null, invSize, config.translateColor(config.menuTitle));
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             inv.addItem(getPlayerSkull(sender, p));
@@ -44,8 +46,8 @@ public class CoordsCommand implements CommandExecutor {
 
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         meta.setOwningPlayer(victim);
-        meta.setDisplayName(Config.getInstance().replaceAndTranslateColor(Config.getInstance().itemTitle, sender, victim));
-        meta.setLore(Config.getInstance().replaceAndTranslateColor(Config.getInstance().itemDescription, sender, victim));
+        meta.setDisplayName(config.replaceAndTranslateColor(config.itemTitle, sender, victim));
+        meta.setLore(config.replaceAndTranslateColor(config.itemDescription, sender, victim));
 
         skull.setItemMeta(meta);
         return skull;

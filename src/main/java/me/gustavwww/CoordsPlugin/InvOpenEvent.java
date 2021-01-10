@@ -13,9 +13,11 @@ import java.util.List;
 
 public class InvOpenEvent implements Listener {
 
+    private final Config config = Config.getInstance();
+
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!event.getView().getTitle().equalsIgnoreCase(Config.getInstance().translateColor(Config.getInstance().menuTitle))) {
+        if (!event.getView().getTitle().equalsIgnoreCase(config.translateColor(config.menuTitle))) {
             return;
         }
 
@@ -33,16 +35,16 @@ public class InvOpenEvent implements Listener {
 
     private void performPurchaseCoordinates(Player sender, OfflinePlayer victim) {
         if (!victim.isOnline()) {
-            sender.sendMessage(Config.getInstance().replaceAndTranslateColor(Config.getInstance().playerOffline, sender, victim.getPlayer()));
+            sender.sendMessage(Config.getInstance().replaceAndTranslateColor(config.playerOffline, sender, victim.getPlayer()));
             return;
         }
-        if (!EcoHandler.getInstance().withdrawPlayer(sender, Config.getInstance().price)) {
-            sender.sendMessage(Config.getInstance().replaceAndTranslateColor(Config.getInstance().notEnoughMoney, sender, victim.getPlayer()));
+        if (!EcoHandler.getInstance().withdrawPlayer(sender, config.price)) {
+            sender.sendMessage(config.replaceAndTranslateColor(config.notEnoughMoney, sender, victim.getPlayer()));
             return;
         }
         Player vic = victim.getPlayer();
 
-        List<String> messages = Config.getInstance().replaceAndTranslateColor(Config.getInstance().coordMessage, sender, victim.getPlayer());
+        List<String> messages = config.replaceAndTranslateColor(config.coordMessage, sender, victim.getPlayer());
         for (String msg : messages) {
             String replaced = msg.replaceAll("%worldtype%", vic.getLocation().getWorld().getEnvironment().toString())
                     .replaceAll("%x%", String.valueOf(vic.getLocation().getBlockX()))
@@ -52,10 +54,13 @@ public class InvOpenEvent implements Listener {
             sender.sendMessage(replaced);
         }
 
-        List<String> broadcast = Config.getInstance().replaceAndTranslateColor(Config.getInstance().broadcastMessage, sender, victim.getPlayer());
-        for (String msg : broadcast) {
-            Bukkit.broadcastMessage(msg);
+        if (config.broadcast) {
+            List<String> broadcast = config.replaceAndTranslateColor(config.broadcastMessage, sender, victim.getPlayer());
+            for (String msg : broadcast) {
+                Bukkit.broadcastMessage(msg);
+            }
         }
+
     }
 
 }
