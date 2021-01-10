@@ -31,5 +31,5 @@ BroadcastMessage:
 # %worldtype% - What world they are in. Nether,End,Normal
 # %x% %y% %z% - Default coordinates
 CoordMessage:
-  - "&9You purchased &3%name%'s &9coordinates for &a%price%"
-  - "&3Coordinates: &c[%worldtype%] X: %x%, Y: %y%, Z: %z%"
+  - "&bYou purchased &a%buyer%'s &bcoordinates for &c%price%."
+  - "&aCoordinates: &c[%worldtype%] %x%, %y%, %z%"
