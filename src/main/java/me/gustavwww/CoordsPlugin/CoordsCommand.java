@@ -34,6 +34,9 @@ public class CoordsCommand implements CommandExecutor {
         Inventory inv = Bukkit.createInventory(null, invSize, config.translateColor(config.menuTitle));
 
         for (Player p : Bukkit.getOnlinePlayers()) {
+            if (config.skipOp && p.isOp()) {
+                continue;
+            }
             inv.addItem(getPlayerSkull(sender, p));
         }
 

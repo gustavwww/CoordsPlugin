@@ -20,6 +20,7 @@ public class Config {
 
     public String menuTitle;
     public double price;
+    public boolean skipOp;
     public String itemTitle;
     public List<String> itemDescription;
     public String notEnoughMoney;
@@ -35,6 +36,7 @@ public class Config {
 
         menuTitle = plugin.getConfig().getString("MenuTitle");
         price = plugin.getConfig().getDouble("Price");
+        skipOp = plugin.getConfig().getBoolean("SkipOp");
         itemTitle = plugin.getConfig().getString("ItemTitle");
         itemDescription = plugin.getConfig().getStringList("ItemDesc");
         notEnoughMoney = plugin.getConfig().getString("NotEnoughMoney");

@@ -6,6 +6,9 @@ MenuTitle: "Purchase Player's Coordinates"
 # The amount of money required to purchase coordinates.
 Price: 1500000
 
+# Skip displaying op players.
+SkipOp: true
+
 # The title and description of the head displayed as a player.
 # %buyer% - The player's name that bought the coordinates.
 # %buyer_display% - The buyer's display name.
