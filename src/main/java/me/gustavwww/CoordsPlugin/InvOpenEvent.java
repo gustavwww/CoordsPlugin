@@ -77,6 +77,7 @@ public class InvOpenEvent implements Listener {
         CompassMeta meta = (CompassMeta) compass.getItemMeta();
         meta.setDisplayName(config.replaceAndTranslateColor(config.compassTitle, p, victim));
         meta.setLore(config.replaceAndTranslateColor(config.compassDescription, p, victim));
+        meta.setLodestoneTracked(false);
         meta.setLodestone(location);
         compass.setItemMeta(meta);
 
