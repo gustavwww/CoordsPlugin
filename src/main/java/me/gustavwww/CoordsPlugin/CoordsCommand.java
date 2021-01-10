@@ -20,32 +20,32 @@ public class CoordsCommand implements CommandExecutor {
         }
 
         Player p = (Player) sender;
-        p.openInventory(createInventory());
+        p.openInventory(createInventory(p));
 
         return true;
     }
 
-    private Inventory createInventory() {
+    private Inventory createInventory(Player sender) {
         int online = Bukkit.getOnlinePlayers().size();
         int invSize = online + (9-(online % 9));
 
         Inventory inv = Bukkit.createInventory(null, invSize, Config.getInstance().translateColor(Config.getInstance().menuTitle));
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            inv.addItem(getPlayerSkull(p));
+            inv.addItem(getPlayerSkull(sender, p));
         }
 
         return inv;
     }
 
-    private ItemStack getPlayerSkull(Player player) {
+    private ItemStack getPlayerSkull(Player sender, Player victim) {
 
         ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1);
 
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
-        meta.setOwningPlayer(player);
-        meta.setDisplayName(Config.getInstance().replaceAndTranslateColor(Config.getInstance().itemTitle, player));
-        meta.setLore(Config.getInstance().replaceAndTranslateColor(Config.getInstance().itemDescription, player));
+        meta.setOwningPlayer(victim);
+        meta.setDisplayName(Config.getInstance().replaceAndTranslateColor(Config.getInstance().itemTitle, sender, victim));
+        meta.setLore(Config.getInstance().replaceAndTranslateColor(Config.getInstance().itemDescription, sender, victim));
 
         skull.setItemMeta(meta);
         return skull;

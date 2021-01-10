@@ -24,6 +24,8 @@ public class Config {
     public List<String> itemDescription;
     public String notEnoughMoney;
     public String playerOffline;
+    public boolean broadcast;
+    public List<String> broadcastMessage;
     public List<String> coordMessage;
 
     private Config() {}
@@ -37,6 +39,8 @@ public class Config {
         itemDescription = plugin.getConfig().getStringList("ItemDesc");
         notEnoughMoney = plugin.getConfig().getString("NotEnoughMoney");
         playerOffline = plugin.getConfig().getString("PlayerOffline");
+        broadcast = plugin.getConfig().getBoolean("Broadcast");
+        broadcastMessage = plugin.getConfig().getStringList("BroadcastMessage");
         coordMessage = plugin.getConfig().getStringList("CoordMessage");
     }
 
@@ -44,17 +48,19 @@ public class Config {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
 
-    public String replaceAndTranslateColor(String s, Player p) {
+    public String replaceAndTranslateColor(String s, Player sender, Player victim) {
         String a = translateColor(s);
-        return a.replaceAll("%name%", p.getName())
-                .replaceAll("%displayname%", p.getDisplayName())
-                .replaceAll("%price%", String.valueOf(price));
+        return a.replaceAll("%victim%", victim.getName())
+                .replaceAll("%victim_display%", victim.getDisplayName())
+                .replaceAll("%price%", String.valueOf(price))
+                .replaceAll("%buyer%", sender.getName())
+                .replaceAll("%buyer_display%", sender.getDisplayName());
     }
 
-    public List<String> replaceAndTranslateColor(List<String> s, Player p) {
+    public List<String> replaceAndTranslateColor(List<String> s, Player sender, Player victim) {
         List<String> l = new ArrayList<>();
         for (String str : s) {
-            l.add(replaceAndTranslateColor(str, p));
+            l.add(replaceAndTranslateColor(str, sender, victim));
         }
         return l;
     }

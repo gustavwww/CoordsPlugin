@@ -7,24 +7,29 @@ MenuTitle: "Purchase Player's Coordinates"
 Price: 1500000
 
 # The title and description of the head displayed as a player.
-# %name% - The player's name
-# %displayname% - The player's display name
+# %buyer% - The player's name that bought the coordinates.
+# %buyer_display% - The buyer's display name.
+# %victim% - The victim's name
+# %victim_display% - The victim's display name
 # %price% - The cost of the item.
-ItemTitle: "&a%name%"
+ItemTitle: "&3%victim%"
 
 ItemDesc:
-  - "&bPrice: %price%"
+  - "&9Price: &a%price%"
   - "&8Click to purchase this player's coordinates"
 
-NotEnoughMoney: "&cInsufficient founds."
-PlayerOffline: "&cPlayer has logged out."
+NotEnoughMoney: "&cInsufficient funds."
+PlayerOffline: "&cThat player is no longer online."
+
+# Boolean indicates whether a message should be broadcast to everyone.
+Broadcast: true
+BroadcastMessage:
+  - "&3%buyer% &9Just bought &3%victim%'s &9Coordinates!"
 
 # The message sent when purchase is complete.
-# %name% - The player's name
-# %displayname% - The player's display name
-# %price% - The cost of the item.
+# Same as above, but also:
 # %worldtype% - What world they are in. Nether,End,Normal
 # %x% %y% %z% - Default coordinates
 CoordMessage:
-  - "&bYou purchased &a%name%'s &bcoordinates for &c%price%."
-  - "&aCoordinates: &c[%worldtype%] %x%, %y%, %z%"
+  - "&9You purchased &3%name%'s &9coordinates for &a%price%"
+  - "&3Coordinates: &c[%worldtype%] X: %x%, Y: %y%, Z: %z%"
