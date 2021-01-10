@@ -60,6 +60,10 @@ public class InvOpenEvent implements Listener {
                 Bukkit.broadcastMessage(msg);
             }
         }
+    }
+
+    private void createCompass() {
+
 
     }
 

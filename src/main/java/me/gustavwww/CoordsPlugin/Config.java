@@ -1,6 +1,7 @@
 package me.gustavwww.CoordsPlugin;
 
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,16 +35,18 @@ public class Config {
     public void loadConfig(JavaPlugin plugin) {
         plugin.saveDefaultConfig();
 
-        menuTitle = plugin.getConfig().getString("MenuTitle");
-        price = plugin.getConfig().getDouble("Price");
-        skipOp = plugin.getConfig().getBoolean("SkipOp");
-        itemTitle = plugin.getConfig().getString("ItemTitle");
-        itemDescription = plugin.getConfig().getStringList("ItemDesc");
-        notEnoughMoney = plugin.getConfig().getString("NotEnoughMoney");
-        playerOffline = plugin.getConfig().getString("PlayerOffline");
-        broadcast = plugin.getConfig().getBoolean("Broadcast");
-        broadcastMessage = plugin.getConfig().getStringList("BroadcastMessage");
-        coordMessage = plugin.getConfig().getStringList("CoordMessage");
+        FileConfiguration config = plugin.getConfig();
+
+        menuTitle = config.getString("MenuTitle");
+        price = config.getDouble("Price");
+        skipOp = config.getBoolean("SkipOp");
+        itemTitle = config.getString("ItemTitle");
+        itemDescription = config.getStringList("ItemDesc");
+        notEnoughMoney = config.getString("NotEnoughMoney");
+        playerOffline = config.getString("PlayerOffline");
+        broadcast = config.getBoolean("Broadcast");
+        broadcastMessage = config.getStringList("BroadcastMessage");
+        coordMessage = config.getStringList("CoordMessage");
     }
 
     public String translateColor(String s) {
